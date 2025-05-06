@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aquapog</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f9;
+        }
+        h1 {
+            color: #333;
+        }
+        #image-container {
+            margin: 20px auto;
+            width: 500px;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        @media screen and (max-width: 576px) {
+            #image-container {
+                margin: 20px;
+                width: 90%;
+                height: auto;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                overflow: hidden;
+            }
+        }
+        #image-container img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+        #action-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: aqua;
+            color: black;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        #action-button:hover {
+            background-color: aqua;
+        }
+        #action-button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+<h1>Aquapog</h1>
+
+<div id="image-container">
+    <!-- Initial static image -->
+    <img id="display-image" src="tenor.png" alt="Static Image">
+</div>
+
+<button id="action-button">Pog</button>
+
+<script>
+    const button = document.getElementById('action-button');
+    const imageElement = document.getElementById('display-image');
+
+    // Replace this with your actual GIF URL
+    const gifUrl = 'tenor.gif';
+    const static_img = 'tenor.png';
+
+    button.addEventListener('click', function() {
+        // Disable the button
+        button.disabled = true;
+
+        // Change the image to the GIF
+        imageElement.src = gifUrl;
+
+        // Set a timeout to re-enable the button after the GIF duration
+        // Note: This is an approximation since we can't detect GIF completion
+        // For precise control, you'd need a GIF library that provides events
+        setTimeout(function() {
+            button.disabled = false;
+            imageElement.src = static_img;
+        }, 1500); // Assuming the GIF lasts 1.5 seconds
+    });
+</script>
+</body>
+</html>
