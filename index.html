@@ -57,6 +57,23 @@
             background-color: #cccccc;
             cursor: not-allowed;
         }
+        #pat-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: pink;
+            color: black;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        #pat-button:hover {
+            background-color: pink;
+        }
+        #pat-button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
     </style>
 </head>
 <body>
@@ -68,13 +85,17 @@
 </div>
 
 <button id="action-button">Pog</button>
+<button id="pat-button">Pat</button>
 
 <script>
     const button = document.getElementById('action-button');
+    const patButton = document.getElementById('pat-button');
     const imageElement = document.getElementById('display-image');
+    imageElement.style.height = '498px'
+    imageElement.style.width = '498px'
 
-    // Replace this with your actual GIF URL
     const gifUrl = 'tenor.gif';
+    const patGifUrl = 'pat.gif';
     const static_img = 'tenor.png';
 
     button.addEventListener('click', function() {
@@ -89,6 +110,22 @@
         // For precise control, you'd need a GIF library that provides events
         setTimeout(function() {
             button.disabled = false;
+            imageElement.src = static_img;
+        }, 1500); // Assuming the GIF lasts 1.5 seconds
+    });
+
+    patButton.addEventListener('click', function() {
+        // Disable the button
+        patButton.disabled = true;
+
+        // Change the image to the GIF
+        imageElement.src = patGifUrl;
+
+        // Set a timeout to re-enable the button after the GIF duration
+        // Note: This is an approximation since we can't detect GIF completion
+        // For precise control, you'd need a GIF library that provides events
+        setTimeout(function() {
+            patButton.disabled = false;
             imageElement.src = static_img;
         }, 1500); // Assuming the GIF lasts 1.5 seconds
     });
