@@ -74,6 +74,23 @@
             background-color: #cccccc;
             cursor: not-allowed;
         }
+        #rotate-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: orange;
+            color: black;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        #rotate-button:hover {
+            background-color: orange;
+        }
+        #rotate-button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
     </style>
 </head>
 <body>
@@ -86,21 +103,36 @@
 
 <button id="action-button">Pog</button>
 <button id="pat-button">Pat</button>
+<button id="rotate-button">Rotate</button>
 
 <script>
     const button = document.getElementById('action-button');
     const patButton = document.getElementById('pat-button');
+    const rotateButton = document.getElementById('rotate-button');
     const imageElement = document.getElementById('display-image');
     imageElement.style.height = '498px'
     imageElement.style.width = '498px'
 
     const gifUrl = 'tenor.gif';
     const patGifUrl = 'pat.gif';
+    const rotateGifUrl = 'rotate.gif';
     const static_img = 'tenor.png';
+
+    function disableAllButtons() {
+        button.disabled = true;
+        patButton.disabled = true;
+        rotateButton.disabled = true;
+    }
+
+    function enableAllButtons() {
+        button.disabled = false;
+        patButton.disabled = false;
+        rotateButton.disabled = false;
+    }
 
     button.addEventListener('click', function() {
         // Disable the button
-        button.disabled = true;
+        disableAllButtons();
 
         // Change the image to the GIF
         imageElement.src = gifUrl;
@@ -109,14 +141,14 @@
         // Note: This is an approximation since we can't detect GIF completion
         // For precise control, you'd need a GIF library that provides events
         setTimeout(function() {
-            button.disabled = false;
+            enableAllButtons();
             imageElement.src = static_img;
         }, 1500); // Assuming the GIF lasts 1.5 seconds
     });
 
     patButton.addEventListener('click', function() {
         // Disable the button
-        patButton.disabled = true;
+        disableAllButtons();
 
         // Change the image to the GIF
         imageElement.src = patGifUrl;
@@ -125,9 +157,20 @@
         // Note: This is an approximation since we can't detect GIF completion
         // For precise control, you'd need a GIF library that provides events
         setTimeout(function() {
-            patButton.disabled = false;
+            enableAllButtons();
             imageElement.src = static_img;
         }, 1500); // Assuming the GIF lasts 1.5 seconds
+    });
+
+    rotateButton.addEventListener('click', function() {
+        disableAllButtons();
+
+        imageElement.src = rotateGifUrl;
+
+        setTimeout(function () {
+            enableAllButtons();
+            imageElement.src = static_img;
+        }, 1500);
     });
 </script>
 </body>
